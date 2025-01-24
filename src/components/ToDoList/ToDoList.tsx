@@ -1,16 +1,17 @@
 import { FormControlLabel } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import ToDoItem from "./ToDoItem/ToDoItem";
+import { Task } from "../../types/types";
 
-interface Props {
-  allTasks: [];
-}
+type Props = {
+  allTasks: Array<Task>;
+};
 
-export const ToDoList = ({ allTasks }: Props) => {
+export const ToDoList: React.FC<Props> = ({ allTasks }) => {
   return (
     <FormGroup>
       {allTasks.map(({ id, text, isCompleted }) => (
-        <ToDoItem id={id} text={text} isCompleted={isCompleted} />
+        <ToDoItem key={id} id={id} text={text} isCompleted={isCompleted} />
       ))}
     </FormGroup>
   );
