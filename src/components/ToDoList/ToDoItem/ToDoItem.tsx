@@ -12,20 +12,19 @@ type Props = {
 export const ToDoItem: React.FC<Props> = ({ task, allTasks, setAllTasks }) => {
   const { id, text, isCompleted } = task;
   const [isChecked, setChecked] = useState(isCompleted);
+  const labelStyle = isChecked ? "" : `textDecorationLine: "line-through"`;
   const handleCheck = (id: string) => {
+    // setChecked(!isChecked);
+    // console.log(isChecked);
     setChecked(!isChecked);
-    console.log(isChecked);
     const updatedTaskIndex = allTasks.findIndex(({ id }) => id === task.id);
     if (updatedTaskIndex > -1) {
       const newAllTasks = allTasks.slice();
       newAllTasks[updatedTaskIndex] = {
         ...newAllTasks[updatedTaskIndex],
-        isCompleted: isChecked,
+        isCompleted: !isChecked,
       };
       setAllTasks(newAllTasks);
-      console.log(newAllTasks);
-
-      console.log(allTasks);
     }
   };
   //task.isCompleted = isChecked; //будет useContext completeTask
@@ -47,6 +46,7 @@ export const ToDoItem: React.FC<Props> = ({ task, allTasks, setAllTasks }) => {
           />
         }
         label={text}
+        style={{ labelStyle }}
       />
     </div>
   );

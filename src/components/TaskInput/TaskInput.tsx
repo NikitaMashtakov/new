@@ -10,7 +10,6 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { Task } from "../../types/types";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AddIcon from "@mui/icons-material/Add";
-import DirectionsIcon from "@mui/icons-material/Directions";
 
 type Props = {
   allTasks: Array<Task>;
@@ -51,6 +50,10 @@ const TaskInput: React.FC<Props> = ({ allTasks, setAllTasks }) => {
           onChange={(e) => {
             setText(e.target.value);
           }}
+          // onKeyDown={(e) => {
+          //   e.preventDefault();
+          //   e.key === "Enter" && addTask(text);
+          // }}
           //   inputProps={{ "aria-label": "search google maps" }}
         />
         <IconButton
