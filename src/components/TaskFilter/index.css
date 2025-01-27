@@ -1,0 +1,16 @@
+.buttons-container {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  padding: 5px 30px;
+}
+.items-left {
+  display: flex;
+
+  justify-content: right;
+}
+.clear-button {
+  justify-content: left;
+}

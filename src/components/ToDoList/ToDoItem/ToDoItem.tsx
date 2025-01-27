@@ -2,6 +2,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Task } from "../../../types/types";
+import "./index.css";
 type Props = {
   task: Task;
   allTasks: Array<Task>;
@@ -12,7 +13,7 @@ type Props = {
 export const ToDoItem: React.FC<Props> = ({ task, allTasks, setAllTasks }) => {
   const { id, text, isCompleted } = task;
   const [isChecked, setChecked] = useState(isCompleted);
-  const labelStyle = isChecked ? "" : `textDecorationLine: "line-through"`;
+  //const labelStyle = { textDecorationLine: isChecked ? "line-through" : "" };
   const handleCheck = (id: string) => {
     // setChecked(!isChecked);
     // console.log(isChecked);
@@ -34,8 +35,32 @@ export const ToDoItem: React.FC<Props> = ({ task, allTasks, setAllTasks }) => {
   // console.log("isCompleted", isCompleted);
 
   return (
-    <div id={id}>
-      <FormControlLabel
+    <div className="task-container" id={id}>
+      <label
+        style={{
+          textDecorationLine: isChecked ? "line-through" : "",
+          color: isChecked ? "#d9d9d9" : "",
+        }}
+      >
+        {text}
+        <input
+          type="checkbox"
+          id={id}
+          checked={isChecked}
+          onChange={() => {
+            handleCheck(id);
+          }}
+        />
+        <span className="checkmark"></span>
+      </label>
+    </div>
+  );
+};
+
+export default ToDoItem;
+
+{
+  /* <FormControlLabel
         control={
           <Checkbox
             id={id}
@@ -46,10 +71,6 @@ export const ToDoItem: React.FC<Props> = ({ task, allTasks, setAllTasks }) => {
           />
         }
         label={text}
-        style={{ labelStyle }}
-      />
-    </div>
-  );
-};
-
-export default ToDoItem;
+        style={{ textDecorationLine: isChecked ? "line-through" : "" }}
+      /> */
+}

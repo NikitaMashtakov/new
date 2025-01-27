@@ -1,11 +1,4 @@
-import {
-  Button,
-  IconButton,
-  Input,
-  InputBase,
-  Paper,
-  TextField,
-} from "@mui/material";
+import { IconButton, InputBase, Paper } from "@mui/material";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { Task } from "../../types/types";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -19,14 +12,15 @@ type Props = {
 const TaskInput: React.FC<Props> = ({ allTasks, setAllTasks }) => {
   const [text, setText] = useState<string>("");
   function addTask(text: string) {
-    const newTask = {
-      id: String(Date.now()),
-      text: text,
-      isCompleted: false,
-    };
-    setAllTasks((tasks) => [...tasks, newTask]);
-    setText("");
-    console.log("allTasks", allTasks);
+    if (text) {
+      const newTask = {
+        id: String(Date.now()),
+        text: text,
+        isCompleted: false,
+      };
+      setAllTasks((tasks) => [...tasks, newTask]);
+      setText("");
+    }
   }
   return (
     <div style={{ display: "flex" }}>
@@ -37,6 +31,7 @@ const TaskInput: React.FC<Props> = ({ allTasks, setAllTasks }) => {
           display: "flex",
           alignItems: "center",
           width: 400,
+          marginBottom: "15px",
         }}
       >
         <IconButton sx={{ p: "10px" }} aria-label="menu">
@@ -44,7 +39,7 @@ const TaskInput: React.FC<Props> = ({ allTasks, setAllTasks }) => {
         </IconButton>
         <InputBase
           multiline={true}
-          sx={{ ml: 1, flex: 1 }}
+          sx={{ ml: 1, flex: 1, fontSize: "22px", fontStyle: "italic" }}
           placeholder="What needs to be done?"
           value={text}
           onChange={(e) => {
@@ -58,7 +53,7 @@ const TaskInput: React.FC<Props> = ({ allTasks, setAllTasks }) => {
         />
         <IconButton
           type="button"
-          sx={{ p: "10px" }}
+          sx={{ p: "10px", opacity: text ? "100%" : "0%" }}
           aria-label="search"
           id="add-button"
           onClick={() => addTask(text)}

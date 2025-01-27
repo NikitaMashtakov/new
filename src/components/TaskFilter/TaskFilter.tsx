@@ -1,24 +1,76 @@
 import { Button } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
-import { Task } from "../../types/types";
-
+import { FilterType, Task } from "../../types/types";
+import "./index.css";
 type Props = {
   allTasks: Array<Task>;
-  setAllTasks: Dispatch<
-    SetStateAction<{ id: string; text: string; isCompleted: boolean }[]>
-  >;
+  setAllTasks: Dispatch<SetStateAction<Task[]>>;
+  setTaskFilter: Dispatch<SetStateAction<FilterType>>;
 };
 
-const TaskFilter: React.FC<Props> = ({ allTasks, setAllTasks }) => {
+const TaskFilter: React.FC<Props> = ({
+  allTasks,
+  setAllTasks,
+  setTaskFilter,
+}) => {
+  function handleClearButtonClick() {
+    const updatedTaskList = allTasks.filter(
+      (task) => task.isCompleted === false
+    );
+    setAllTasks(updatedTaskList);
+  }
+  const itemsLeftCount = allTasks.filter(
+    (task) => task.isCompleted === false
+  ).length;
   return (
-    <div>
-      <div className="tasks-count">
-        <span>2 items left</span>
+    <div className="buttons-container">
+      <div className="items-left">
+        <span>{itemsLeftCount} items left</span>
       </div>
-      <Button>All</Button>
-      <Button>Active</Button>
-      <Button>Completed</Button>
-      <Button>Clear completed</Button>
+      <div className="filter-buttons-group">
+        <Button
+          sx={{
+            border: "1px solid #e9d9d8",
+            padding: "3px 3px",
+            width: "max-content",
+            minWidth: "",
+          }}
+          onClick={() => {
+            setTaskFilter("all");
+          }}
+        >
+          All
+        </Button>
+        <Button
+          sx={{
+            border: "1px solid #e9d9d8",
+            padding: "3px 3px",
+            width: "max-content",
+            minWidth: "",
+          }}
+          onClick={() => {
+            setTaskFilter("active");
+          }}
+        >
+          Active
+        </Button>
+        <Button
+          sx={{
+            border: "1px solid #e9d9d8",
+            padding: "3px 3px",
+            width: "max-content",
+            minWidth: "",
+          }}
+          onClick={() => {
+            setTaskFilter("completed");
+          }}
+        >
+          Completed
+        </Button>
+      </div>
+      <div className="clear-button">
+        <Button onClick={handleClearButtonClick}>Clear completed</Button>
+      </div>
     </div>
   );
 };
