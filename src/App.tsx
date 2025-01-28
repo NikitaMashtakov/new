@@ -1,7 +1,4 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { ToDoList } from "./components/ToDoList/ToDoList";
 import TaskContainer from "./components/TaskContainer/TaskContainer";
 
 // const allTasks = [

@@ -1,5 +1,5 @@
 import FormGroup from "@mui/material/FormGroup";
-import ToDoItem from "./ToDoItem/ToDoItem";
+import TaskItem from "./TaskItem/TaskItem";
 import { FilterType, Task } from "../../types/types";
 import { Dispatch, SetStateAction } from "react";
 
@@ -9,7 +9,7 @@ type Props = {
   tasksFilter: FilterType;
 };
 
-export const ToDoList: React.FC<Props> = ({
+export const TaskList: React.FC<Props> = ({
   allTasks,
   setAllTasks,
   tasksFilter,
@@ -27,7 +27,7 @@ export const ToDoList: React.FC<Props> = ({
       break;
   }
   const taskListToShow = taskList?.map((task) => (
-    <ToDoItem
+    <TaskItem
       key={task.id}
       task={task}
       allTasks={allTasks}

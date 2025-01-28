@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { ToDoList } from "../ToDoList/ToDoList";
+import { TaskList } from "../TaskList/TaskList";
 import TaskFilter from "../TaskFilter/TaskFilter";
 import TaskInput from "../TaskInput/TaskInput";
 import { FilterType } from "../../types/types";
 import "./index.css";
 const initTasks = [
-  { id: "1", text: "rewerwrw", isCompleted: false },
-  { id: "2", text: "fewfewfw", isCompleted: false },
-  { id: "3", text: "dsdsdsdsd", isCompleted: true },
+  { id: "1", text: "Тестовое задание", isCompleted: false },
+  { id: "2", text: "Прекрасный код", isCompleted: true },
+  { id: "3", text: "Покрытие тестами", isCompleted: false },
 ];
 
 const TaskContainer = () => {
@@ -17,7 +17,7 @@ const TaskContainer = () => {
   return (
     <div className="container" style={{ backgroundColor: "white" }}>
       <TaskInput allTasks={allTasks} setAllTasks={setAllTasks} />
-      <ToDoList
+      <TaskList
         allTasks={allTasks}
         setAllTasks={setAllTasks}
         tasksFilter={tasksFilter}

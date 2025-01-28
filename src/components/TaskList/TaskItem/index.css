@@ -1,7 +1,7 @@
 .task-container {
   display: block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 50px;
   padding-bottom: 12px;
   margin-bottom: 12px;
   cursor: pointer;
@@ -37,6 +37,7 @@
   border: 1px solid #e6e6e6;
   border-radius: 50%;
   background-color: #fff;
+  margin-left: 15px;
 }
 
 /* On mouse-over, add a grey background color */
