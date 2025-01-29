@@ -3,7 +3,9 @@ import { Task } from "../../../types/types";
 import "./index.css";
 import checkedIcon from "../../icons/checked";
 import uncheckedIcon from "../../icons/unchecked";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox, FormControlLabel, IconButton } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
+
 type Props = {
   task: Task;
   setAllTasks: Dispatch<SetStateAction<Task[]>>;
@@ -22,45 +24,66 @@ export const TaskItem: FC<Props> = ({ task, setAllTasks }) => {
       )
     );
   };
+  const handleDelete = (deleteId: string) => {
+    setAllTasks((prevState) =>
+      prevState.filter((task) => task.id !== deleteId)
+    );
+  };
 
   return (
-    <FormControlLabel
-      control={
-        <Checkbox
-          id={id}
-          icon={uncheckedIcon}
-          checkedIcon={checkedIcon}
-          checked={isChecked}
-          onChange={() => {
-            handleCheck(id);
-          }}
-        />
-      }
-      label={text}
-      style={{ textOverflow: "ellipsis" }}
-    />
+    <div
+      className="task-item"
+      style={{
+        borderBottom: "1px solid #d9d9d9",
+        display: "flex",
+        flex: "1",
+        alignItems: "center",
+      }}
+    >
+      <FormControlLabel
+        control={
+          <Checkbox
+            id={id}
+            icon={uncheckedIcon}
+            checkedIcon={checkedIcon}
+            checked={isChecked}
+            onChange={() => {
+              handleCheck(id);
+            }}
+          />
+        }
+        label={<p>{text}</p>}
+        style={{
+          display: "flex",
+          flex: "2",
+          margin: "0",
+          padding: "5px",
+
+          textDecorationLine: isChecked ? "line-through" : "",
+          color: isChecked ? "#d9d9d9" : "#4d4d4d",
+          overflow: "hidden",
+          // whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
+        }}
+      />
+      <IconButton
+        id={id}
+        type="button"
+        aria-label="remove"
+        style={{
+          width: "30px",
+          height: "30px",
+          padding: "5px 5px",
+          marginRight: "5px",
+        }}
+        onClick={() => {
+          handleDelete(id);
+        }}
+      >
+        <ClearIcon />
+      </IconButton>
+    </div>
   );
 };
 
 export default TaskItem;
-{
-  /* <div className="task-container" id={id}>
-      <label
-        style={{
-          textDecorationLine: isChecked ? "line-through" : "",
-          color: isChecked ? "#d9d9d9" : "",
-        }}
-      >
-        {text}
-        <input
-          type="checkbox"
-          id={id}
-          checked={isChecked}
-          onChange={() => {
-            handleCheck(id);
-          }}
-        />
-        <span className="checkmark"></span>
-      </label>
-    </div> */
-}

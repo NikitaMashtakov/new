@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { TaskList } from "../TaskList/TaskList";
 import TaskFilter from "../TaskFilter/TaskFilter";
 import TaskInput from "../TaskInput/TaskInput";
@@ -13,10 +13,10 @@ const initTasks = [
 const TaskContainer: FC = () => {
   const [allTasks, setAllTasks] = useState(initTasks);
   const [tasksFilter, setTasksFilter] = useState<FilterType>("all");
-  // const [itemsLeft, setItemsLeft] = useState<number>(0);
-  // const handleItemsLeft = (allTasks: Task[]) =>
-  //   allTasks.filter((task) => task.isCompleted === false).length;
-  // setItemsLeft(handleItemsLeft(allTasks));
+  const itemsLeft = useMemo(
+    () => allTasks.filter((task) => task.isCompleted === false).length,
+    [allTasks]
+  );
   return (
     <div className="container" style={{ backgroundColor: "white" }}>
       <TaskInput setAllTasks={setAllTasks} />
@@ -26,7 +26,7 @@ const TaskContainer: FC = () => {
         tasksFilter={tasksFilter}
       />
       <TaskFilter
-        // itemsLeft={itemsLeft}
+        itemsLeft={itemsLeft}
         setAllTasks={setAllTasks}
         setTaskFilter={setTasksFilter}
       />

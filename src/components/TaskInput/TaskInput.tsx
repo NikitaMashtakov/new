@@ -1,5 +1,5 @@
 import { IconButton, InputBase, Paper } from "@mui/material";
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import { Task } from "../../types/types";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AddIcon from "@mui/icons-material/Add";
@@ -24,11 +24,10 @@ const TaskInput: FC<Props> = ({ setAllTasks }) => {
   return (
     <Paper
       sx={{
-        p: "2px 4px",
+        padding: "2px 4px",
         display: "flex",
         alignItems: "center",
         width: "100%",
-        marginBottom: "15px",
         borderRadius: "0",
       }}
     >
@@ -36,7 +35,13 @@ const TaskInput: FC<Props> = ({ setAllTasks }) => {
         <KeyboardArrowDownIcon />
       </IconButton>
       <InputBase
-        sx={{ ml: 0, flex: 1, fontSize: "22px", fontStyle: "italic" }}
+        sx={{
+          ml: 0,
+          flex: 1,
+          fontSize: "22px",
+          fontWeight: "300",
+          fontStyle: "italic",
+        }}
         placeholder="What needs to be done?"
         value={text}
         onChange={(e) => {
@@ -50,8 +55,7 @@ const TaskInput: FC<Props> = ({ setAllTasks }) => {
       {text && (
         <IconButton
           type="button"
-          sx={{ p: "10px", opacity: text ? "100%" : "0%" }}
-          aria-label="search"
+          aria-label="add"
           id="add-button"
           onClick={() => addTask(text)}
         >

@@ -15,7 +15,7 @@ export const Unchecked: ReactNode = (
         cy="13"
         r="12.5"
         fill="#D9D9D9"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
         stroke="#e6e6e6"
       />
     </svg>

@@ -15,7 +15,7 @@ export const Checked: ReactNode = (
         cy="13"
         r="12.5"
         fill="#D9D9D9"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
         stroke="#CEE0DD"
       />
       <line
@@ -24,7 +24,7 @@ export const Checked: ReactNode = (
         x2="10.8315"
         y2="18.9992"
         stroke="#77C0AE"
-        stroke-width="2"
+        strokeWidth="2"
       />
       <line
         x1="20.6172"
@@ -32,7 +32,7 @@ export const Checked: ReactNode = (
         x2="9.806"
         y2="19.415"
         stroke="#77C0AE"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   </SvgIcon>
