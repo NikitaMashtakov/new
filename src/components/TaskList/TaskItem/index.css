@@ -42,7 +42,7 @@
 
 /* On mouse-over, add a grey background color */
 .task-container:hover input ~ .checkmark {
-  background-color: e6e6e6;
+  background-color: #e6e6e6;
 }
 
 /* When the checkbox is checked, add a blue background */

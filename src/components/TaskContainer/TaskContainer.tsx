@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { TaskList } from "../TaskList/TaskList";
 import TaskFilter from "../TaskFilter/TaskFilter";
 import TaskInput from "../TaskInput/TaskInput";
-import { FilterType } from "../../types/types";
+import { FilterType, Task } from "../../types/types";
 import "./index.css";
 const initTasks = [
   { id: "1", text: "Тестовое задание", isCompleted: false },
@@ -10,20 +10,23 @@ const initTasks = [
   { id: "3", text: "Покрытие тестами", isCompleted: false },
 ];
 
-const TaskContainer = () => {
+const TaskContainer: FC = () => {
   const [allTasks, setAllTasks] = useState(initTasks);
   const [tasksFilter, setTasksFilter] = useState<FilterType>("all");
-
+  // const [itemsLeft, setItemsLeft] = useState<number>(0);
+  // const handleItemsLeft = (allTasks: Task[]) =>
+  //   allTasks.filter((task) => task.isCompleted === false).length;
+  // setItemsLeft(handleItemsLeft(allTasks));
   return (
     <div className="container" style={{ backgroundColor: "white" }}>
-      <TaskInput allTasks={allTasks} setAllTasks={setAllTasks} />
+      <TaskInput setAllTasks={setAllTasks} />
       <TaskList
         allTasks={allTasks}
         setAllTasks={setAllTasks}
         tasksFilter={tasksFilter}
       />
       <TaskFilter
-        allTasks={allTasks}
+        // itemsLeft={itemsLeft}
         setAllTasks={setAllTasks}
         setTaskFilter={setTasksFilter}
       />

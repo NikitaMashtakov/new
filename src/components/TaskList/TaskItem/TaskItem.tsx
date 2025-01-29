@@ -1,30 +1,50 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import { Task } from "../../../types/types";
 import "./index.css";
+import checkedIcon from "../../icons/checked";
+import uncheckedIcon from "../../icons/unchecked";
+import { Checkbox, FormControlLabel } from "@mui/material";
 type Props = {
   task: Task;
-  allTasks: Array<Task>;
   setAllTasks: Dispatch<SetStateAction<Task[]>>;
 };
-export const TaskItem: React.FC<Props> = ({ task, allTasks, setAllTasks }) => {
+export const TaskItem: FC<Props> = ({ task, setAllTasks }) => {
   const { id, text, isCompleted } = task;
   const [isChecked, setChecked] = useState(isCompleted);
   //const labelStyle = { textDecorationLine: isChecked ? "line-through" : "" };
-  const handleCheck = (id: string) => {
+  const handleCheck = (currentId: string) => {
     setChecked(!isChecked);
-    const updatedTaskIndex = allTasks.findIndex(({ id }) => id === task.id);
-    if (updatedTaskIndex > -1) {
-      const newAllTasks = allTasks.slice();
-      newAllTasks[updatedTaskIndex] = {
-        ...newAllTasks[updatedTaskIndex],
-        isCompleted: !isChecked,
-      };
-      setAllTasks(newAllTasks);
-    }
+    setAllTasks((prevState) =>
+      prevState.map((task) =>
+        task.id === currentId
+          ? { ...task, isCompleted: !isChecked }
+          : { ...task }
+      )
+    );
   };
 
   return (
-    <div className="task-container" id={id}>
+    <FormControlLabel
+      control={
+        <Checkbox
+          id={id}
+          icon={uncheckedIcon}
+          checkedIcon={checkedIcon}
+          checked={isChecked}
+          onChange={() => {
+            handleCheck(id);
+          }}
+        />
+      }
+      label={text}
+      style={{ textOverflow: "ellipsis" }}
+    />
+  );
+};
+
+export default TaskItem;
+{
+  /* <div className="task-container" id={id}>
       <label
         style={{
           textDecorationLine: isChecked ? "line-through" : "",
@@ -42,8 +62,5 @@ export const TaskItem: React.FC<Props> = ({ task, allTasks, setAllTasks }) => {
         />
         <span className="checkmark"></span>
       </label>
-    </div>
-  );
-};
-
-export default TaskItem;
+    </div> */
+}

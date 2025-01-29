@@ -1,27 +1,22 @@
 import { Button } from "@mui/material";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, FC, SetStateAction } from "react";
 import { FilterType, Task } from "../../types/types";
 import "./index.css";
 type Props = {
-  allTasks: Array<Task>;
+  // itemsLeft: number;
   setAllTasks: Dispatch<SetStateAction<Task[]>>;
   setTaskFilter: Dispatch<SetStateAction<FilterType>>;
 };
 
-const TaskFilter: React.FC<Props> = ({
-  allTasks,
-  setAllTasks,
-  setTaskFilter,
-}) => {
+const TaskFilter: FC<Props> = ({ setAllTasks, setTaskFilter }) => {
   function handleClearButtonClick() {
-    const updatedTaskList = allTasks.filter(
-      (task) => task.isCompleted === false
+    setAllTasks((prevState) =>
+      prevState.filter((task) => task.isCompleted === false)
     );
-    setAllTasks(updatedTaskList);
   }
-  const itemsLeftCount = allTasks.filter(
-    (task) => task.isCompleted === false
-  ).length;
+  // const itemsLeftCount = allTasks.filter(
+  //   (task) => task.isCompleted === false
+  // ).length;
   const buttonStyles = {
     border: "1px solid #e9d9d8",
     padding: "2px 6px",
@@ -47,7 +42,7 @@ const TaskFilter: React.FC<Props> = ({
     <div className="buttons-container">
       <div className="items-left">
         <span style={{ color: "#7f7f7f", fontWeight: "300" }}>
-          {itemsLeftCount} items left
+          {0} items left
         </span>
       </div>
       <div className="filter-buttons-group">
