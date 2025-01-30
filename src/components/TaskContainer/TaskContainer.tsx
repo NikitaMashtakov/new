@@ -2,8 +2,7 @@ import { FC, useMemo, useState } from "react";
 import { TaskList } from "../TaskList/TaskList";
 import TaskFilter from "../TaskFilter/TaskFilter";
 import TaskInput from "../TaskInput/TaskInput";
-import { FilterType, Task } from "../../types/types";
-import "./index.css";
+import { FilterType } from "../../types/types";
 const initTasks = [
   { id: "1", text: "Тестовое задание", isCompleted: false },
   { id: "2", text: "Прекрасный код", isCompleted: true },
@@ -18,7 +17,15 @@ const TaskContainer: FC = () => {
     [allTasks]
   );
   return (
-    <div className="container" style={{ backgroundColor: "white" }}>
+    <div
+      style={{
+        backgroundColor: "white",
+        width: "60%",
+        display: "flex",
+        flexDirection: "column",
+        boxShadow: "0px 0px 3px 0px #b9b9b9",
+      }}
+    >
       <TaskInput setAllTasks={setAllTasks} />
       <TaskList
         allTasks={allTasks}
@@ -28,6 +35,7 @@ const TaskContainer: FC = () => {
       <TaskFilter
         itemsLeft={itemsLeft}
         setAllTasks={setAllTasks}
+        tasksFilter={tasksFilter}
         setTaskFilter={setTasksFilter}
       />
     </div>

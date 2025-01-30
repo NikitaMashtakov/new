@@ -1,6 +1,5 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { Task } from "../../../types/types";
-import "./index.css";
 import checkedIcon from "../../icons/checked";
 import uncheckedIcon from "../../icons/unchecked";
 import { Checkbox, FormControlLabel, IconButton } from "@mui/material";
@@ -53,7 +52,7 @@ export const TaskItem: FC<Props> = ({ task, setAllTasks }) => {
           />
         }
         label={<p>{text}</p>}
-        style={{
+        sx={{
           display: "flex",
           flex: "2",
           margin: "0",
@@ -70,11 +69,15 @@ export const TaskItem: FC<Props> = ({ task, setAllTasks }) => {
         id={id}
         type="button"
         aria-label="remove"
-        style={{
+        sx={{
           width: "30px",
           height: "30px",
           padding: "5px 5px",
           marginRight: "5px",
+          color: "#d9d9d9",
+          "&:hover": {
+            color: "#ff4d4d",
+          },
         }}
         onClick={() => {
           handleDelete(id);
