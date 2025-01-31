@@ -3,3 +3,5 @@ export type Task = {
   text: string;
   isCompleted: boolean;
 };
+
+export type FilterType = "all" | "completed" | "active";
