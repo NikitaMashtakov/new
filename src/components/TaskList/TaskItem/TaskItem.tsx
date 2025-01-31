@@ -9,10 +9,38 @@ type Props = {
   task: Task;
   setAllTasks: Dispatch<SetStateAction<Task[]>>;
 };
+const taskItemStyles = {
+  borderBottom: "1px solid #d9d9d9",
+  display: "flex",
+  flex: "1",
+  alignItems: "center",
+};
+const deleteButtonStyles = {
+  width: "30px",
+  height: "30px",
+  padding: "5px 5px",
+  marginRight: "5px",
+  color: "#d9d9d9",
+  "&:hover": {
+    color: "#ff4d4d",
+  },
+};
+const labelStyles = (isChecked: boolean) => {
+  return {
+    display: "flex",
+    flex: "2",
+    margin: "0",
+    padding: "5px",
+    textDecorationLine: isChecked ? "line-through" : "",
+    color: isChecked ? "#d9d9d9" : "#4d4d4d",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  };
+};
+
 export const TaskItem: FC<Props> = ({ task, setAllTasks }) => {
   const { id, text, isCompleted } = task;
   const [isChecked, setChecked] = useState(isCompleted);
-  //const labelStyle = { textDecorationLine: isChecked ? "line-through" : "" };
   const handleCheck = (currentId: string) => {
     setChecked(!isChecked);
     setAllTasks((prevState) =>
@@ -30,15 +58,7 @@ export const TaskItem: FC<Props> = ({ task, setAllTasks }) => {
   };
 
   return (
-    <div
-      className="task-item"
-      style={{
-        borderBottom: "1px solid #d9d9d9",
-        display: "flex",
-        flex: "1",
-        alignItems: "center",
-      }}
-    >
+    <div className="task-item" style={taskItemStyles}>
       <FormControlLabel
         control={
           <Checkbox
@@ -52,33 +72,13 @@ export const TaskItem: FC<Props> = ({ task, setAllTasks }) => {
           />
         }
         label={<p>{text}</p>}
-        sx={{
-          display: "flex",
-          flex: "2",
-          margin: "0",
-          padding: "5px",
-
-          textDecorationLine: isChecked ? "line-through" : "",
-          color: isChecked ? "#d9d9d9" : "#4d4d4d",
-          overflow: "hidden",
-          // whiteSpace: "nowrap",
-          textOverflow: "ellipsis",
-        }}
+        sx={labelStyles(isChecked)}
       />
       <IconButton
         id={id}
         type="button"
         aria-label="remove"
-        sx={{
-          width: "30px",
-          height: "30px",
-          padding: "5px 5px",
-          marginRight: "5px",
-          color: "#d9d9d9",
-          "&:hover": {
-            color: "#ff4d4d",
-          },
-        }}
+        sx={deleteButtonStyles}
         onClick={() => {
           handleDelete(id);
         }}

@@ -7,7 +7,20 @@ import AddIcon from "@mui/icons-material/Add";
 type Props = {
   setAllTasks: Dispatch<SetStateAction<Task[]>>;
 };
-
+const paperStyles = {
+  padding: "2px 4px",
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+  borderRadius: "0",
+};
+const inputStyles = {
+  ml: 0,
+  flex: 1,
+  fontSize: "22px",
+  fontWeight: "300",
+  fontStyle: "italic",
+};
 const TaskInput: FC<Props> = ({ setAllTasks }) => {
   const [text, setText] = useState<string>("");
   function addTask(text: string) {
@@ -22,26 +35,12 @@ const TaskInput: FC<Props> = ({ setAllTasks }) => {
     }
   }
   return (
-    <Paper
-      sx={{
-        padding: "2px 4px",
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        borderRadius: "0",
-      }}
-    >
+    <Paper sx={paperStyles}>
       <IconButton sx={{ p: "10px" }} aria-label="menu">
         <KeyboardArrowDownIcon />
       </IconButton>
       <InputBase
-        sx={{
-          ml: 0,
-          flex: 1,
-          fontSize: "22px",
-          fontWeight: "300",
-          fontStyle: "italic",
-        }}
+        sx={inputStyles}
         placeholder="What needs to be done?"
         value={text}
         onChange={(e) => {
@@ -50,7 +49,6 @@ const TaskInput: FC<Props> = ({ setAllTasks }) => {
         onKeyDown={(e) => {
           if (e.key === "Enter") addTask(text);
         }}
-        //   inputProps={{ "aria-label": "" }}
       />
       {text && (
         <IconButton

@@ -1,6 +1,8 @@
-import { Button } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { Dispatch, FC, SetStateAction } from "react";
 import { FilterType, Task } from "../../types/types";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 type Props = {
   itemsLeft: number;
   setAllTasks: Dispatch<SetStateAction<Task[]>>;
@@ -28,14 +30,14 @@ const clearButtonStyles = {
     border: "1px solid #e9d9d8",
   },
 };
-const buttonsContainerStyles = {
-  display: "flex",
-  gap: "20px",
-  alignItems: "center",
-  padding: "5px 10px",
-  "@media(maxWidth: 850px)": {
-    flexDirection: "column" as const,
-  },
+const buttonsBoxStyles = (match: boolean) => {
+  return {
+    display: "flex",
+    gap: "20px",
+    alignItems: "center",
+    padding: "5px 10px",
+    flexDirection: match ? "row" : "column",
+  };
 };
 const itemsLeftStyles = {
   display: "flex",
@@ -66,8 +68,10 @@ const TaskFilter: FC<Props> = ({
       prevState.filter((task) => task.isCompleted === false)
     );
   }
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
   return (
-    <div style={buttonsContainerStyles}>
+    <Box sx={buttonsBoxStyles(matches)}>
       <div style={itemsLeftStyles}>
         <span>{itemsLeft} items left</span>
       </div>
@@ -114,7 +118,7 @@ const TaskFilter: FC<Props> = ({
           Clear completed
         </Button>
       </div>
-    </div>
+    </Box>
   );
 };
 
